@@ -39,7 +39,7 @@ Code for Import https://scriptui.joonas.me — (Triple click to select):
 
             // ADOBETEAMSAVER
             // ==============
-            var AdobeTeamSaverPanel = new Window("palette", "Adobe-Team-Saver", undefined, {resizeable:true, closeButton: false})
+            var AdobeTeamSaverPanel = (thisObj instanceof Panel) ? thisObj : new Window("palette", "Adobe-Team-Saver", undefined, {resizeable:true, closeButton: false})
                 AdobeTeamSaverPanel.text = "Adobe-Team-Saver"; 
                 AdobeTeamSaverPanel.preferredSize.width = 150; 
                 AdobeTeamSaverPanel.preferredSize.height = 200; 
