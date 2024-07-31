@@ -6,13 +6,15 @@
     "configurations": [
         {
             "type": "extendscript-debug",
-            "request": "attach",
-            "name": "Attach to ExtendScript Engine"
+            "request": "launch",
+            "name": "Launch Script in ExtendScript Engine",
+            "hostAppSpecifier": "aftereffects-24.0"
+
         },
         {
             "type": "extendscript-debug",
-            "request": "launch",
-            "name": "Launch Script in ExtendScript Engine"
+            "request": "attach",
+            "name": "Attach to ExtendScript Engine"
         }
     ]
 }
