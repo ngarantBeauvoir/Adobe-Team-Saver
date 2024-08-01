@@ -102,6 +102,12 @@ Code for Import https://scriptui.joonas.me — (Triple click to select):
             var textTimeSave2 = groupTimeSave.add("statictext", undefined, undefined, {name: "textTimeSave2"}); 
                 textTimeSave2.text = "minutes";
 
+            var textTimeSave3 = groupTimeSave.add("statictext", undefined, undefined, {name: "textTimeSave3"});
+                
+                dropdownlistTime.onChange = function () {
+                    textTimeSave3.text = dropdownlistTime.items[dropdownlistTime.selection];
+                }
+
             AdobeTeamSaverPanel.layout.layout(true);
 
             return AdobeTeamSaverPanel;
