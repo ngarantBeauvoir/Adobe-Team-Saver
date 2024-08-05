@@ -47,8 +47,8 @@ Code for Import https://scriptui.joonas.me — (Triple click to select):
             // ===================
             var win = (thisObj instanceof Panel) ? thisObj : new Window("palette", "Adobe-Team-Saver", undefined, {resizeable:true, closeButton: false});
                 win.text = "Adobe-Team-Saver"; 
-                win.preferredSize.width = 350; 
-                win.preferredSize.height = 500; 
+                win.preferredSize.width = -1; 
+                win.preferredSize.height = -1; 
                 win.orientation = "row"; 
                 win.alignChildren = ["center","top"]; 
                 win.spacing = 10; 
@@ -58,7 +58,7 @@ Code for Import https://scriptui.joonas.me — (Triple click to select):
             // ============
             var panelNewPath = win.add("panel", undefined, undefined, {name: "panelNewPath"}); 
                 panelNewPath.text = "Sauvegarde"; 
-                panelNewPath.preferredSize.width = 300; 
+                panelNewPath.preferredSize.width = 300;
                 panelNewPath.orientation = "column"; 
                 panelNewPath.alignChildren = ["left","top"]; 
                 panelNewPath.spacing = 10; 
@@ -109,10 +109,7 @@ Code for Import https://scriptui.joonas.me — (Triple click to select):
 
         var AdobeTeamSaver = gui_AdobeTeamSaver_buildUI(thisObj);
 
-        if (AdobeTeamSaver != null && AdobeTeamSaver instanceof Window){
-            AdobeTeamSaver.center();
-            AdobeTeamSaver.show();
-        }
+        AdobeTeamSaver instanceof Window? (AdobeTeamSaver.center(), AdobeTeamSaver.show()) : (AdobeTeamSaver.layout.layout(true), AdobeTeamSaver.layout.resize());
     }
     gui_AdobeTeamSaver(this);
 }
