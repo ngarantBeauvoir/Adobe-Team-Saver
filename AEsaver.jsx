@@ -1,17 +1,23 @@
 /*
-======================================
+======================================================
 Fichier: AEsaver.jsx
 Auteur: ngarant
 Creation: 2024-07-15
 Description: Script de sauvergarde automatique pour After Effects
-======================================
+======================================================
 */
-projectName = app.project.file.name; // Nom du projet
-projectName = projectName.replace(".aep", ""); // Suppression du.aep
 
-projectPath = app.project.file; // Chemin du projet
+//                      Variables
+// ======================================================
 
-newPath = new File("~/Desktop/" + projectName + ".aep"); // Nouveau chemin
+// Variables de Projet
+var projectName = app.project.file.name;                        // Nom du projet
+var projectName = projectName.replace(".aep", "");              // Suppression du.aep
+var projectPath = app.project.file;                             // Chemin du projet
+var newPath = new File("~/Desktop/" + projectName + ".aep");    // Nouveau chemin
+
+// Variables de temps
+var timeValue = 30 * 60000;  // Valeur du temps de sauvegarde de base en millisecondes (30 minutes)
 
 $.writeln("Le nom du projet est : ", projectName)
 $.writeln("L'emplacement du projet est : ", projectPath)
@@ -26,13 +32,48 @@ $.writeln("Le nouvel emplacement est : ", newPath)
 //     $.writeln("Le projet n'a pas été sauvegardé")
 // }
 
-// var win = (thisObj instanceof Panel) ? thisObj : new Window("palette", "Adobe-Team-Saver", undefined, {resizeable:true, closeButton: false})
+//                      Functions
+// ======================================================
+
+// Lorsque la valeur de la dropdownlist change
+function setTimeValue(dropdownlistTime) {
+
+    // Valeur du temps de sauvegarde
+    timeValue = Number(dropdownlistTime.selection.text);
+
+    // Conversion des minutes en millisecondes
+    timeValue = timeValue * 60000;
+
+    alert(timeValue);
+
+    return timeValue;
+}
+
+// Sauvegarde automatique toutes les 10 minutes
+    // function saveData() {
+    //     // Your saving logic here
+    //     alert("Data saved!");
+
+    //     // Schedule the next save
+    //     setTimeout(saveData, 600000); // Save every 10 minutes
+    // }
+
+    // window.onload = function () {
+    //     // Check if there's a scheduled save time stored
+    //     var lastSaveTime = localStorage.getItem('lastSaveTime');
+    //     var now = new Date().getTime();
+
+    //     if (lastSaveTime && now - lastSaveTime < 600000) { // If less than 10 minutes have passed since the last save
+    //         var delay = 600000 - (now - lastSaveTime);
+    //         setTimeout(saveData, delay); // Schedule the save for the remaining time
+    //     } else {
+    //         saveData(); // Otherwise, start saving immediately
+    //     }
+    // }
 
 
-/*
-Code for Import https://scriptui.joonas.me — (Triple click to select): 
-{"items":{"item-0":{"id":0,"type":"Dialog","parentId":false,"style":{"enabled":true,"varName":"win","windowType":"Window","creationProps":{"su1PanelCoordinates":false,"maximizeButton":false,"minimizeButton":false,"independent":false,"closeButton":true,"borderless":false,"resizeable":false},"text":"Adobe-Team-Saver","preferredSize":[150,200],"margins":16,"orientation":"column","spacing":10,"alignChildren":["left","top"]}},"item-1":{"id":1,"type":"EditText","parentId":2,"style":{"enabled":true,"varName":"editNewPath","creationProps":{"noecho":false,"readonly":false,"multiline":false,"scrollable":false,"borderless":false,"enterKeySignalsOnChange":false},"softWrap":false,"text":"~/Desktop/","justify":"left","preferredSize":[0,0],"alignment":null,"helpTip":null}},"item-2":{"id":2,"type":"Panel","parentId":4,"style":{"enabled":true,"varName":"panelNewPath","creationProps":{"borderStyle":"etched","su1PanelCoordinates":false},"text":"Sauvegarde","preferredSize":[0,0],"margins":10,"orientation":"column","spacing":10,"alignChildren":["left","top"],"alignment":null}},"item-3":{"id":3,"type":"StaticText","parentId":2,"style":{"enabled":true,"varName":"textNewPath","creationProps":{"truncate":"none","multiline":false,"scrolling":false},"softWrap":false,"text":"Emplacement de sauvegarde automatique","justify":"left","preferredSize":[0,0],"alignment":null,"helpTip":null}},"item-4":{"id":4,"type":"Group","parentId":0,"style":{"enabled":true,"varName":"groupPanelSave","preferredSize":[0,0],"margins":0,"orientation":"row","spacing":10,"alignChildren":["left","center"],"alignment":null}}},"order":[0,4,2,3,1],"settings":{"importJSON":true,"indentSize":false,"cepExport":false,"includeCSSJS":true,"showDialog":true,"functionWrapper":false,"afterEffectsDockable":false,"itemReferenceList":"None"},"activeId":0}
-*/ 
+//                          GUI
+// ======================================================
 
 {
     function gui_AdobeTeamSaver(thisObj) {
@@ -95,12 +136,19 @@ Code for Import https://scriptui.joonas.me — (Triple click to select):
             var textTimeSave1 = groupTimeSave.add("statictext", undefined, undefined, {name: "textTimeSave1"}); 
                 textTimeSave1.text = "Sauvegarder à chaque"; 
 
-            var dropdownlistTime_array = ["5","10","15","20","25","30","35","40","45","50","55","60"]; 
+            var dropdownlistTime_array = [5,10,15,20,25,30,35,40,45,50,55,60]; 
             var dropdownlistTime = groupTimeSave.add("dropdownlist", undefined, undefined, {name: "dropdownlistTime", items: dropdownlistTime_array}); 
                 dropdownlistTime.selection = 5; 
 
             var textTimeSave2 = groupTimeSave.add("statictext", undefined, undefined, {name: "textTimeSave2"}); 
                 textTimeSave2.text = "minutes";
+
+
+            // Lorsque la valeur de la dropdownlist change
+            dropdownlistTime.onChange = function() {
+                setTimeValue(dropdownlistTime);
+            }
+            
 
             win.layout.layout(true);
 
