@@ -97,7 +97,7 @@ Code for Import https://scriptui.joonas.me — (Triple click to select):
 
             var dropdownlistTime_array = ["5","10","15","20","25","30","35","40","45","50","55","60"]; 
             var dropdownlistTime = groupTimeSave.add("dropdownlist", undefined, undefined, {name: "dropdownlistTime", items: dropdownlistTime_array}); 
-                dropdownlistTime.selection = 0; 
+                dropdownlistTime.selection = 5; 
 
             var textTimeSave2 = groupTimeSave.add("statictext", undefined, undefined, {name: "textTimeSave2"}); 
                 textTimeSave2.text = "minutes";
