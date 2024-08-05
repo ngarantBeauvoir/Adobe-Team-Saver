@@ -35,6 +35,17 @@ $.writeln("Le nouvel emplacement est : ", newPath)
 //                      Functions
 // ======================================================
 
+// Verification si une sauvegarde a ete cedulee
+var lastSaveTime = null;
+var now = new Date().getTime();
+
+if (lastSaveTime && now - lastSaveTime < timeValue) { // Si moins de X minutes se sont écoulées depuis la dernière sauvegarde
+    var delay = timeValue - (now - lastSaveTime);
+    setTimeout(saveData, delay); // Horaire de la sauvegarde
+} else {
+    saveData(); // Sinon, sauvegarde immédiate
+}
+
 // Lorsque la valeur de la dropdownlist change
 function setTimeValue(dropdownlistTime) {
 
@@ -50,26 +61,13 @@ function setTimeValue(dropdownlistTime) {
 }
 
 // Sauvegarde automatique toutes les 10 minutes
-    // function saveData() {
-    //     // Your saving logic here
-    //     alert("Data saved!");
+    function saveData() {
+        // Your saving logic here
+        alert("Data saved!");
 
-    //     // Schedule the next save
-    //     setTimeout(saveData, 600000); // Save every 10 minutes
-    // }
-
-    // window.onload = function () {
-    //     // Check if there's a scheduled save time stored
-    //     var lastSaveTime = localStorage.getItem('lastSaveTime');
-    //     var now = new Date().getTime();
-
-    //     if (lastSaveTime && now - lastSaveTime < 600000) { // If less than 10 minutes have passed since the last save
-    //         var delay = 600000 - (now - lastSaveTime);
-    //         setTimeout(saveData, delay); // Schedule the save for the remaining time
-    //     } else {
-    //         saveData(); // Otherwise, start saving immediately
-    //     }
-    // }
+        // Ceduler la prochaine sauvegarde
+        setTimeout(saveData, timeValue); // Save every 10 minutes
+    }
 
 
 //                          GUI
