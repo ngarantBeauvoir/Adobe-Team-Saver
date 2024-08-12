@@ -35,15 +35,15 @@ $.writeln("Le nouvel emplacement est : ", newPath)
 //                      Functions
 // ======================================================
 
-// Verification si une sauvegarde a ete cedulee
-var lastSaveTime = null;
-var now = new Date().getTime();
 
-if (lastSaveTime && now - lastSaveTime < timeValue) { // Si moins de X minutes se sont écoulées depuis la dernière sauvegarde
-    var delay = timeValue - (now - lastSaveTime);
-    setTimeout(saveData, delay); // Horaire de la sauvegarde
-} else {
-    saveData(); // Sinon, sauvegarde immédiate
+
+saveLoop();
+// Verification si une sauvegarde a ete cedulee
+function saveLoop() {
+    // TODO à faire fonctionner
+    // var taskId = app.scheduleTask(function() {saveData()}, parseFloat(5000), true);
+    var taskId = app.scheduleTask(function() {alert("hello world!")}, 5000, true);
+    alert("ca functionne")
 }
 
 // Lorsque la valeur de la dropdownlist change
@@ -61,14 +61,9 @@ function setTimeValue(dropdownlistTime) {
 }
 
 // Sauvegarde automatique toutes les 10 minutes
-    function saveData() {
-        // Your saving logic here
-        alert("Data saved!");
-
-        // Ceduler la prochaine sauvegarde
-        setTimeout(saveData, timeValue); // Save every 10 minutes
-    }
-
+function saveData() {
+    alert("Data saved!");
+}
 
 //                          GUI
 // ======================================================
