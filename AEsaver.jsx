@@ -14,6 +14,7 @@ Description: Script de sauvergarde automatique pour After Effects
 - Tester la sauvegarde
 - Automatiser la sauvegarde
 - Redondance
+- Path
 
 
 - DONE Logique si le projet est un TeamProject
@@ -34,7 +35,10 @@ if (app.project.file != null) {
 
 var projectFileName = projectFileName.replace(".aep", "");          // Suppression du.aep
 var projectPath = app.project.file;                                 // Chemin du projet
-var newPath = new File("~/Desktop/" + projectFileName + ".aep");    // Nouveau chemin
+var defaultPath = Folder.desktop;                                   // Chemin par défaut (bureau)
+var defaultFile = new File( String(defaultPath) + projectFileName + ".aep" ); // Nouveau fichier projet
+
+var selectedFolder = new Folder(String(defaultPath));   // Chemin du dossier sélectionné
 
 // var selectedFolder = Folder.selectDialog();
 
@@ -99,6 +103,16 @@ function saveData() {
     alert("Data saved!");
 }
 
+function changeFolder() {
+    var tempFolder = Folder.selectDialog("Sélectionner le dossier de sauvegarde");
+
+    if(tempFolder != null){
+        editNewPath.text = tempFolder.path;
+    }
+    alert(tempFolder.path);
+
+    return tempFolder;
+}
 //                          GUI
 // ======================================================
 
@@ -144,9 +158,21 @@ function saveData() {
             var textNewPath = groupNewPath.add("statictext", undefined, undefined, {name: "textNewPath"}); 
                 textNewPath.text = "Emplacement de sauvegarde automatique"; 
 
-            var editNewPath = groupNewPath.add('edittext {properties: {name: "editNewPath"}}'); 
-                editNewPath.text = "~/Desktop/"; 
-                editNewPath.preferredSize.width = 250; 
+            // GROUPSELECTPATH
+            // ===============
+            var groupSelectPath = groupNewPath.add("group", undefined, {name: "groupSelectPath"}); 
+                groupSelectPath.orientation = "row"; 
+                groupSelectPath.alignChildren = ["center","center"];
+                groupSelectPath.alignment = ["fill", "center"];
+                groupSelectPath.spacing = 10; 
+                groupSelectPath.margins = 0; 
+
+            var editNewPath = groupSelectPath.add('edittext {properties: {name: "editNewPath"}}'); 
+                editNewPath.text = defaultPath; 
+                editNewPath.preferredSize.width = 120; 
+
+            var buttonOpenPath = groupSelectPath.add("button", undefined, undefined, {name: "buttonOpenPath"}); 
+                buttonOpenPath.text = "Ouvrir";
 
             // PANELNEWPATH
             // ============
@@ -177,6 +203,11 @@ function saveData() {
                 setTimeValue(dropdownlistTime);
             }
             
+            // Selection du chemin de sauvegarde
+            buttonOpenPath.onClick = function() {
+                changeFolder();
+                alert(selectedFolder.path);
+            }
 
             win.layout.layout(true);
 
