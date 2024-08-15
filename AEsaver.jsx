@@ -7,11 +7,13 @@ Description: Script de sauvergarde automatique pour After Effects
 ======================================================
 */
 
-//                      Variables
-// ======================================================
+/*
+                     Variables
+======================================================
+*/
 
 // Variables de Projet
-var projectName = app.project.file.name;                        // Nom du projet
+var projectName = "AdobeTeamSaver"//app.project.file.name;                        // Nom du projet
 var projectName = projectName.replace(".aep", "");              // Suppression du.aep
 var projectPath = app.project.file;                             // Chemin du projet
 var newPath = new File("~/Desktop/" + projectName + ".aep");    // Nouveau chemin
@@ -35,15 +37,25 @@ $.writeln("Le nouvel emplacement est : ", newPath)
 //                      Functions
 // ======================================================
 
+try {
+    //FONCTIONNEL
+    var taskId = app.scheduleTask('alert("hello world!")', 10000, true);
+    alert("yeepie!");
+}
+catch(x_x){
+    alert("ERREUR");
 
+    }
+finally {
+    //code
+}
 
-saveLoop();
+// saveLoop();
 // Verification si une sauvegarde a ete cedulee
 function saveLoop() {
     // TODO à faire fonctionner
-    // var taskId = app.scheduleTask(function() {saveData()}, parseFloat(5000), true);
-    var taskId = app.scheduleTask(function() {alert("hello world!")}, 5000, true);
-    alert("ca functionne")
+    // var taskId = app.scheduleTask(function() {alert("hello world!")}, parseFloat(5000), true);
+
 }
 
 // Lorsque la valeur de la dropdownlist change
