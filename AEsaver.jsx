@@ -10,13 +10,12 @@ Description: Script de sauvergarde automatique pour After Effects
 /*                
                         TODO
 ======================================================
-- Path de sauvegarde interactif
 - Tester la sauvegarde
 - Automatiser la sauvegarde
 - Redondance
-- Path
 
 
+- DONE Path de sauvegarde interactif
 - DONE Logique si le projet est un TeamProject
 */
 
