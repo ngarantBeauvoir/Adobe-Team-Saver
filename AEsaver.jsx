@@ -35,10 +35,11 @@ if (app.project.file != null) {
 
 var projectFileName = projectFileName.replace(".aep", "");          // Suppression du.aep
 var projectPath = app.project.file;                                 // Chemin du projet
-var defaultPath = Folder.desktop;                                   // Chemin par défaut (bureau)
-var defaultFile = new File( String(defaultPath) + projectFileName + ".aep" ); // Nouveau fichier projet
+var defaultPath = Folder.desktop;                                   // Dossier par défaut (bureau)
+var defaultPathString = defaultPath.path;                           // Chemin du dossier par défaut (bureau)
+var defaultFile = new File( defaultPathString + projectFileName + ".aep" ); // Nouveau fichier projet
 
-var selectedFolder = new Folder(String(defaultPath));   // Chemin du dossier sélectionné
+var selectedFolder = new Folder(defaultPathString);   // Chemin du dossier sélectionné
 
 // var selectedFolder = Folder.selectDialog();
 
@@ -46,10 +47,6 @@ var selectedFolder = new Folder(String(defaultPath));   // Chemin du dossier sé
 
 // Variables de temps
 var timeValue = 30 * 60000;  // Valeur du temps de sauvegarde de base en millisecondes (30 minutes)
-
-$.writeln("Le nom du projet est : ", projectFileName)
-$.writeln("L'emplacement du projet est : ", projectPath)
-$.writeln("Le nouvel emplacement est : ", newPath)
 
 // Confirmation de la sauvegarde du projet
 // if (confirm("Voulez-vous sauvergarder le projet?")) {
@@ -103,16 +100,14 @@ function saveData() {
     alert("Data saved!");
 }
 
-function changeFolder() {
-    var tempFolder = Folder.selectDialog("Sélectionner le dossier de sauvegarde");
-
-    if(tempFolder != null){
-        editNewPath.text = tempFolder.path;
-    }
-    alert(tempFolder.path);
+// Selection du chemin de sauvegarde
+function setFolder() {
+    var tempFolder = Folder(defaultPathString).selectDlg("Sélectionner le dossier de sauvegarde");
 
     return tempFolder;
 }
+
+
 //                          GUI
 // ======================================================
 
@@ -129,10 +124,10 @@ function changeFolder() {
             // ===================
             var win = (thisObj instanceof Panel) ? thisObj : new Window("palette", "Adobe-Team-Saver", undefined, {resizeable:true, closeButton: false});
                 win.text = "Adobe-Team-Saver"; 
-                win.preferredSize.width = 300; 
-                win.preferredSize.height = 150; 
+                win.preferredSize.width = -1; 
+                win.preferredSize.height = -1; 
                 win.orientation = "column"; 
-                win.alignChildren = ["center","top"]; 
+                win.alignChildren = ["left","top"]; 
                 win.spacing = 10; 
                 win.margins = 16; 
 
@@ -205,8 +200,7 @@ function changeFolder() {
             
             // Selection du chemin de sauvegarde
             buttonOpenPath.onClick = function() {
-                changeFolder();
-                alert(selectedFolder.path);
+                editNewPath.text = setFolder();
             }
 
             win.layout.layout(true);
