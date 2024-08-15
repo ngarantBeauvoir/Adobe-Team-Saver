@@ -23,15 +23,26 @@ Description: Script de sauvergarde automatique pour After Effects
 */
 
 // Variables de Projet
-var projectName = "AdobeTeamSaver"//app.project.file.name;                        // Nom du projet
-var projectName = projectName.replace(".aep", "");              // Suppression du.aep
-var projectPath = app.project.file;                             // Chemin du projet
-var newPath = new File("~/Desktop/" + projectName + ".aep");    // Nouveau chemin
+var projectFileName = "RENOMEZ-MOI";                                // Nom du projet
+
+// Si le projet est un TeamProject
+if (app.project.file != null) {
+ projectFileName = app.project.file.name;
+}
+
+var projectFileName = projectFileName.replace(".aep", "");          // Suppression du.aep
+var projectPath = app.project.file;                                 // Chemin du projet
+var newPath = new File("~/Desktop/" + projectFileName + ".aep");    // Nouveau chemin
+
+
+
+alert(projectFileName);
+
 
 // Variables de temps
 var timeValue = 30 * 60000;  // Valeur du temps de sauvegarde de base en millisecondes (30 minutes)
 
-$.writeln("Le nom du projet est : ", projectName)
+$.writeln("Le nom du projet est : ", projectFileName)
 $.writeln("L'emplacement du projet est : ", projectPath)
 $.writeln("Le nouvel emplacement est : ", newPath)
 
@@ -47,18 +58,18 @@ $.writeln("Le nouvel emplacement est : ", newPath)
 //                      Functions
 // ======================================================
 
-try {
-    //FONCTIONNEL
-    var taskId = app.scheduleTask('saveData()', 10000, false);
-    alert("yeepie!");
-}
-catch(x_x){
-    alert("ERREUR");
+// try {
+//     //FONCTIONNEL
+//     var taskId = app.scheduleTask('saveData()', 10000, false);
+//     alert("yeepie!");
+// }
+// catch(x_x){
+//     alert("ERREUR");
 
-    }
-finally {
-    //code
-}
+//     }
+// finally {
+//     //code
+// }
 
 // saveLoop();
 // Verification si une sauvegarde a ete cedulee
