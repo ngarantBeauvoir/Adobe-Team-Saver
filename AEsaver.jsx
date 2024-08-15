@@ -36,7 +36,7 @@ var projectFileName = projectFileName.replace(".aep", "");          // Suppressi
 var projectPath = app.project.file;                                 // Chemin du projet
 var newPath = new File("~/Desktop/" + projectFileName + ".aep");    // Nouveau chemin
 
-var selectedFolder = Folder.selectDialog();
+// var selectedFolder = Folder.selectDialog();
 
 
 
@@ -108,16 +108,16 @@ function saveData() {
 
             /*
             Code for Import https://scriptui.joonas.me — (Triple click to select): 
-            {"items":{"item-0":{"id":0,"type":"Dialog","parentId":false,"style":{"enabled":true,"varName":"win","windowType":"Window","creationProps":{"su1PanelCoordinates":false,"maximizeButton":false,"minimizeButton":false,"independent":false,"closeButton":true,"borderless":false,"resizeable":false},"text":"Adobe-Team-Saver","preferredSize":[350,200],"margins":16,"orientation":"row","spacing":10,"alignChildren":["center","top"]}},"item-1":{"id":1,"type":"EditText","parentId":4,"style":{"enabled":true,"varName":"editNewPath","creationProps":{"noecho":false,"readonly":false,"multiline":false,"scrollable":false,"borderless":false,"enterKeySignalsOnChange":false},"softWrap":false,"text":"~/Desktop/","justify":"left","preferredSize":[250,0],"alignment":null,"helpTip":null}},"item-2":{"id":2,"type":"Panel","parentId":0,"style":{"enabled":true,"varName":"panelNewPath","creationProps":{"borderStyle":"etched","su1PanelCoordinates":false},"text":"Sauvegarde","preferredSize":[300,0],"margins":10,"orientation":"column","spacing":10,"alignChildren":["left","top"],"alignment":null}},"item-3":{"id":3,"type":"StaticText","parentId":4,"style":{"enabled":true,"varName":"textNewPath","creationProps":{"truncate":"none","multiline":false,"scrolling":false},"softWrap":false,"text":"Emplacement de sauvegarde automatique","justify":"left","preferredSize":[0,0],"alignment":null,"helpTip":null}},"item-4":{"id":4,"type":"Group","parentId":2,"style":{"enabled":true,"varName":"groupNewPath","preferredSize":[0,0],"margins":0,"orientation":"column","spacing":10,"alignChildren":["left","center"],"alignment":null}},"item-6":{"id":6,"type":"DropDownList","parentId":7,"style":{"enabled":true,"varName":"dropdownlistTime","text":"DropDownList","listItems":"5,10,15,20,25,30,35,40,45,50,55,60","preferredSize":[0,0],"alignment":null,"selection":0,"helpTip":null}},"item-7":{"id":7,"type":"Group","parentId":2,"style":{"enabled":true,"varName":"groupTimeSave","preferredSize":[0,0],"margins":0,"orientation":"row","spacing":10,"alignChildren":["left","center"],"alignment":null}},"item-8":{"id":8,"type":"StaticText","parentId":7,"style":{"enabled":true,"varName":"textTimeSave1","creationProps":{"truncate":"none","multiline":false,"scrolling":false},"softWrap":false,"text":"Sauvegarder à chaque","justify":"left","preferredSize":[0,0],"alignment":null,"helpTip":null}},"item-9":{"id":9,"type":"StaticText","parentId":7,"style":{"enabled":true,"varName":"textTimeSave2","creationProps":{"truncate":"none","multiline":false,"scrolling":false},"softWrap":false,"text":"minutes","justify":"left","preferredSize":[0,0],"alignment":null,"helpTip":null}},"item-10":{"id":10,"type":"Divider","parentId":2,"style":{"enabled":true,"varName":null}}},"order":[0,2,4,3,1,10,7,8,6,9],"settings":{"importJSON":true,"indentSize":false,"cepExport":false,"includeCSSJS":true,"showDialog":true,"functionWrapper":false,"afterEffectsDockable":false,"itemReferenceList":"None"},"activeId":9}
+            {"items":{"item-0":{"id":0,"type":"Dialog","parentId":false,"style":{"enabled":true,"varName":"win","windowType":"Window","creationProps":{"su1PanelCoordinates":false,"maximizeButton":false,"minimizeButton":false,"independent":false,"closeButton":true,"borderless":false,"resizeable":false},"text":"Adobe-Team-Saver","preferredSize":[350,200],"margins":16,"orientation":"column","spacing":10,"alignChildren":["center","top"]}},"item-1":{"id":1,"type":"EditText","parentId":4,"style":{"enabled":true,"varName":"editNewPath","creationProps":{"noecho":false,"readonly":false,"multiline":false,"scrollable":false,"borderless":false,"enterKeySignalsOnChange":false},"softWrap":false,"text":"~/Desktop/","justify":"left","preferredSize":[250,0],"alignment":null,"helpTip":null}},"item-2":{"id":2,"type":"Panel","parentId":0,"style":{"enabled":true,"varName":"panelNewPath","creationProps":{"borderStyle":"etched","su1PanelCoordinates":false},"text":"Sauvegarde","preferredSize":[300,0],"margins":10,"orientation":"column","spacing":10,"alignChildren":["left","top"],"alignment":null}},"item-3":{"id":3,"type":"StaticText","parentId":4,"style":{"enabled":true,"varName":"textNewPath","creationProps":{"truncate":"none","multiline":false,"scrolling":false},"softWrap":false,"text":"Emplacement de sauvegarde automatique","justify":"left","preferredSize":[0,0],"alignment":null,"helpTip":null}},"item-4":{"id":4,"type":"Group","parentId":2,"style":{"enabled":true,"varName":"groupNewPath","preferredSize":[0,0],"margins":0,"orientation":"column","spacing":10,"alignChildren":["left","center"],"alignment":null}},"item-6":{"id":6,"type":"DropDownList","parentId":7,"style":{"enabled":true,"varName":"dropdownlistTime","text":"DropDownList","listItems":"5,10,15,20,25,30,35,40,45,50,55,60","preferredSize":[0,0],"alignment":null,"selection":0,"helpTip":null}},"item-7":{"id":7,"type":"Group","parentId":2,"style":{"enabled":true,"varName":"groupTimeSave","preferredSize":[0,0],"margins":0,"orientation":"row","spacing":10,"alignChildren":["left","center"],"alignment":null}},"item-8":{"id":8,"type":"StaticText","parentId":7,"style":{"enabled":true,"varName":"textTimeSave1","creationProps":{"truncate":"none","multiline":false,"scrolling":false},"softWrap":false,"text":"Sauvegarder à chaque","justify":"left","preferredSize":[0,0],"alignment":null,"helpTip":null}},"item-9":{"id":9,"type":"StaticText","parentId":7,"style":{"enabled":true,"varName":"textTimeSave2","creationProps":{"truncate":"none","multiline":false,"scrolling":false},"softWrap":false,"text":"minutes","justify":"left","preferredSize":[0,0],"alignment":null,"helpTip":null}},"item-10":{"id":10,"type":"Divider","parentId":2,"style":{"enabled":true,"varName":null}}},"order":[0,2,4,3,1,10,7,8,6,9],"settings":{"importJSON":true,"indentSize":false,"cepExport":false,"includeCSSJS":true,"showDialog":true,"functionWrapper":false,"afterEffectsDockable":false,"itemReferenceList":"None"},"activeId":9}
             */ 
 
             // win
             // ===================
             var win = (thisObj instanceof Panel) ? thisObj : new Window("palette", "Adobe-Team-Saver", undefined, {resizeable:true, closeButton: false});
                 win.text = "Adobe-Team-Saver"; 
-                win.preferredSize.width = -1; 
-                win.preferredSize.height = -1; 
-                win.orientation = "row"; 
+                win.preferredSize.width = 300; 
+                win.preferredSize.height = 150; 
+                win.orientation = "column"; 
                 win.alignChildren = ["center","top"]; 
                 win.spacing = 10; 
                 win.margins = 16; 
@@ -126,7 +126,8 @@ function saveData() {
             // ============
             var panelNewPath = win.add("panel", undefined, undefined, {name: "panelNewPath"}); 
                 panelNewPath.text = "Sauvegarde"; 
-                panelNewPath.preferredSize.width = 300;
+                panelNewPath.preferredSize.width = -1;
+                panelNewPath.preferredSize.height = -1;
                 panelNewPath.orientation = "column"; 
                 panelNewPath.alignChildren = ["left","top"]; 
                 panelNewPath.spacing = 10; 
