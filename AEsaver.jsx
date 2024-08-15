@@ -11,10 +11,12 @@ Description: Script de sauvergarde automatique pour After Effects
                         TODO
 ======================================================
 - Path de sauvegarde interactif
-- Logique si le projet est un TeamProject
 - Tester la sauvegarde
 - Automatiser la sauvegarde
 - Redondance
+
+
+- DONE Logique si le projet est un TeamProject
 */
 
 /*
@@ -34,9 +36,8 @@ var projectFileName = projectFileName.replace(".aep", "");          // Suppressi
 var projectPath = app.project.file;                                 // Chemin du projet
 var newPath = new File("~/Desktop/" + projectFileName + ".aep");    // Nouveau chemin
 
+var selectedFolder = Folder.selectDialog();
 
-
-alert(projectFileName);
 
 
 // Variables de temps
