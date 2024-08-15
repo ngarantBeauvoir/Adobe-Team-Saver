@@ -7,6 +7,16 @@ Description: Script de sauvergarde automatique pour After Effects
 ======================================================
 */
 
+/*                
+                        TODO
+======================================================
+- Path de sauvegarde interactif
+- Logique si le projet est un TeamProject
+- Tester la sauvegarde
+- Automatiser la sauvegarde
+- Redondance
+*/
+
 /*
                      Variables
 ======================================================
@@ -39,7 +49,7 @@ $.writeln("Le nouvel emplacement est : ", newPath)
 
 try {
     //FONCTIONNEL
-    var taskId = app.scheduleTask('alert("hello world!")', 10000, true);
+    var taskId = app.scheduleTask('saveData()', 10000, false);
     alert("yeepie!");
 }
 catch(x_x){
