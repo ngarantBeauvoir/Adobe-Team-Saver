@@ -217,6 +217,10 @@ saveLoop();
             // Lorsque la valeur de la dropdownlist change
             dropdownlistTime.onChange = function() {
                 setTimeValue(dropdownlistTime);
+                
+                // Lorsque la valeur change, annule la tache de sauvegarde en cours et recommence
+                app.cancelTask(saveTaskID);
+                saveLoop();
             }
             
             // Selection du chemin de sauvegarde et changement du texte affiché
@@ -227,6 +231,8 @@ saveLoop();
                 if (tempFolder != null) {
                     selectedFolder = tempFolder;
                     editNewPath.text =  selectedFolder; 
+                    app.cancelTask(saveTaskID);
+                    saveLoop();
                 }
             }
 
