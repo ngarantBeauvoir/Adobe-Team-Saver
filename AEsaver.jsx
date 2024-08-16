@@ -42,42 +42,20 @@ var defaultFile = new File( defaultPathString + projectFileName + ".aep" ); // N
 
 var selectedFolder = new Folder(defaultPath);   // Chemin du dossier sélectionné
 
+var saveTaskID = 0; // ID de la tâche de sauvegarde
+
 
 // Variables de temps
 var timeValue = 30 * 60000;  // Valeur du temps de sauvegarde de base en millisecondes (30 minutes)
 
-
-// Confirmation de la sauvegarde du projet
-// if (confirm("Voulez-vous sauvergarder le projet?")) {
-//     app.project.save(newPath);
-//     $.writeln("Le projet a été sauvegardé")
-// }
-// else { 
-//     $.writeln("Le projet n'a pas été sauvegardé")
-// }
-
 //                      Functions
 // ======================================================
 
-// try {
-//     //FONCTIONNEL
-//     var taskId = app.scheduleTask('saveData()', 10000, false);
-//     alert("yeepie!");
-// }
-// catch(x_x){
-//     alert("ERREUR");
 
-//     }
-// finally {
-//     //code
-// }
-
-// saveLoop();
-// Verification si une sauvegarde a ete cedulee
+// Loop de sauvegarde
 function saveLoop() {
     // TODO à faire fonctionner
-    // var taskId = app.scheduleTask(function() {alert("hello world!")}, parseFloat(5000), true);
-
+    var taskId = app.scheduleTask('saveProject()', timeValue, true);
 }
 
 // Lorsque la valeur de la dropdownlist change
@@ -89,27 +67,27 @@ function setTimeValue(dropdownlistTime) {
     // Conversion des minutes en millisecondes
     timeValue = timeValue * 60000;
 
-    alert(timeValue);
-
+    $.writeln("setTimeValue(): Intervale de temps de sauvegarde : " + timeValue);
     return timeValue;
 }
 
 // Sauvegarde automatique toutes les 10 minutes
-function saveData() {
+function saveProject() {
     saveFile = new File (getSaveFile());
 
     // Sauvegarde du projet
     app.project.convertTeamProjectToProject(saveFile);
     app.project.save(saveFile);
 
-    // alert("Data saved!");
+    $.writeln("saveProject(): Le projet a été sauvegardé");
 }
 
 function getSaveFile(){
-    var date = getCurrentDate();
+    var date = getCurrentTime();
     // var saveFile = new File(selectedFolder + "/" + projectFileName + date + ".aep");
     var saveFile = String(selectedFolder) + "/" + projectFileName + date + ".aep";
 
+    $.writeln("getSaveFile(): Fichier de sauvegarde: " + saveFile);
     return saveFile;
 }
 
@@ -117,11 +95,12 @@ function getSaveFile(){
 function setFolder() {
     var tempFolder = Folder(defaultPathString).selectDlg("Sélectionner le dossier de sauvegarde");
 
+    $$.writeln("setFolder(): Chemin du dossier sélectionné: " + tempFolder);
     return tempFolder;
 }
 
 // Chercher date du jour en format YYYY-MM-DD-HH-MM-SS
-function getCurrentDate() {
+function getCurrentTime() {
     var date = new Date();
 
     var yyyy = date.getFullYear().toString();
@@ -138,10 +117,13 @@ function getCurrentDate() {
     var minChars = min.split('');
     var ssChars = ss.split('');
 
-    return yyyy +  (mmChars[1]?mm:"0"+mmChars[0]) +  (ddChars[1]?dd:"0"+ddChars[0]) + '_' + (hhChars[1]?hh:"0"+hhChars[0]) +  (minChars[1]?min:"0"+minChars[0]) +  (ssChars[1]?ss:"0"+ssChars[0]);
+    var now = yyyy +  (mmChars[1]?mm:"0"+mmChars[0]) +  (ddChars[1]?dd:"0"+ddChars[0]) + '_' + (hhChars[1]?hh:"0"+hhChars[0]) +  (minChars[1]?min:"0"+minChars[0]) +  (ssChars[1]?ss:"0"+ssChars[0]);
+    
+    $.writeln("getCurrentTime(): Date : " + now);
+    return today;
 }
 
-saveData();
+saveLoop();
 //                          GUI
 // ======================================================
 
