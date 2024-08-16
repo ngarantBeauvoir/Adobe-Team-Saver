@@ -7,18 +7,6 @@ Description: Script de sauvergarde automatique pour After Effects
 ======================================================
 */
 
-/*                
-                        TODO
-======================================================
-- Tester la sauvegarde
-- Automatiser la sauvegarde
-- Redondance
-
-
-- DONE Path de sauvegarde interactif
-- DONE Logique si le projet est un TeamProject
-- DONE Date et heure de sauvegarde
-*/
 
 /*
                      Variables
