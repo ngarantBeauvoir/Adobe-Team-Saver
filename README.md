@@ -9,7 +9,7 @@ Script pour sauvegarder les projets Teams Adobe localement.
 6window.png
 7ui.png
 
-# Installation After Effects
+## Installation After Effects
 
 1. Télécharger le script `AEsaver.jsx` du répertoire Git
 
