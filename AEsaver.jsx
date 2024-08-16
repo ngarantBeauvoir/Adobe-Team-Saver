@@ -40,7 +40,7 @@ var defaultPath = Folder.desktop;                                   // Dossier p
 var defaultPathString = defaultPath.path;                           // Chemin du dossier par défaut (bureau)
 var defaultFile = new File( defaultPathString + projectFileName + ".aep" ); // Nouveau fichier projet
 
-var selectedFolder = new Folder(defaultPathString);   // Chemin du dossier sélectionné
+var selectedFolder = new Folder(defaultPath);   // Chemin du dossier sélectionné
 
 
 // Variables de temps
@@ -96,14 +96,19 @@ function setTimeValue(dropdownlistTime) {
 
 // Sauvegarde automatique toutes les 10 minutes
 function saveData() {
-    alert(defaultPath);
-    // alert("Sauvegardé sur : " + String(getSaveFile()));
+    saveFile = new File (getSaveFile());
+
+    // Sauvegarde du projet
+    app.project.convertTeamProjectToProject(saveFile);
+    app.project.save(saveFile);
+
     // alert("Data saved!");
 }
 
 function getSaveFile(){
     var date = getCurrentDate();
-    var saveFile = new File(selectedFolder.path + "/" + projectFileName + date + ".aep");
+    // var saveFile = new File(selectedFolder + "/" + projectFileName + date + ".aep");
+    var saveFile = String(selectedFolder) + "/" + projectFileName + date + ".aep";
 
     return saveFile;
 }
@@ -136,7 +141,7 @@ function getCurrentDate() {
     return yyyy +  (mmChars[1]?mm:"0"+mmChars[0]) +  (ddChars[1]?dd:"0"+ddChars[0]) + '_' + (hhChars[1]?hh:"0"+hhChars[0]) +  (minChars[1]?min:"0"+minChars[0]) +  (ssChars[1]?ss:"0"+ssChars[0]);
 }
 
-
+saveData();
 //                          GUI
 // ======================================================
 
