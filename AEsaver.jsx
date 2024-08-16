@@ -96,7 +96,16 @@ function setTimeValue(dropdownlistTime) {
 
 // Sauvegarde automatique toutes les 10 minutes
 function saveData() {
-    alert("Data saved!");
+    alert(defaultPath);
+    // alert("Sauvegardé sur : " + String(getSaveFile()));
+    // alert("Data saved!");
+}
+
+function getSaveFile(){
+    var date = getCurrentDate();
+    var saveFile = new File(selectedFolder.path + "/" + projectFileName + date + ".aep");
+
+    return saveFile;
 }
 
 // Selection du chemin de sauvegarde
@@ -225,7 +234,13 @@ function getCurrentDate() {
             
             // Selection du chemin de sauvegarde et changement du texte affiché
             buttonOpenPath.onClick = function() {
-                editNewPath.text, selectedFolder = setFolder();
+                var tempFolder = setFolder();
+                
+                // Vérifie si le dossier a été sélectionné, sinon ne change pas la valeur
+                if (tempFolder != null) {
+                    selectedFolder = tempFolder;
+                    editNewPath.text =  selectedFolder; 
+                }
             }
 
             win.layout.layout(true);
