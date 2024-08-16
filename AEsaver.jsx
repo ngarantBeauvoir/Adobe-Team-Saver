@@ -17,6 +17,7 @@ Description: Script de sauvergarde automatique pour After Effects
 
 - DONE Path de sauvegarde interactif
 - DONE Logique si le projet est un TeamProject
+- DONE Date et heure de sauvegarde
 */
 
 /*
@@ -25,6 +26,7 @@ Description: Script de sauvergarde automatique pour After Effects
 */
 
 // Variables de Projet
+// -------------------
 var projectFileName = "RENOMEZ-MOI";                                // Nom du projet
 
 // Si le projet est un TeamProject
@@ -40,12 +42,10 @@ var defaultFile = new File( defaultPathString + projectFileName + ".aep" ); // N
 
 var selectedFolder = new Folder(defaultPathString);   // Chemin du dossier sélectionné
 
-// var selectedFolder = Folder.selectDialog();
-
-
 
 // Variables de temps
 var timeValue = 30 * 60000;  // Valeur du temps de sauvegarde de base en millisecondes (30 minutes)
+
 
 // Confirmation de la sauvegarde du projet
 // if (confirm("Voulez-vous sauvergarder le projet?")) {
@@ -104,6 +104,27 @@ function setFolder() {
     var tempFolder = Folder(defaultPathString).selectDlg("Sélectionner le dossier de sauvegarde");
 
     return tempFolder;
+}
+
+// Chercher date du jour en format YYYY-MM-DD-HH-MM-SS
+function getCurrentDate() {
+    var date = new Date();
+
+    var yyyy = date.getFullYear().toString();
+    var mm = (date.getMonth()+1).toString();
+    var dd  = date.getDate().toString();
+    var hh = date.getHours().toString();
+    var min = date.getMinutes().toString();
+    var ss = date.getSeconds().toString();
+
+
+    var mmChars = mm.split('');
+    var ddChars = dd.split('');
+    var hhChars = hh.split('');
+    var minChars = min.split('');
+    var ssChars = ss.split('');
+
+    return yyyy +  (mmChars[1]?mm:"0"+mmChars[0]) +  (ddChars[1]?dd:"0"+ddChars[0]) + '_' + (hhChars[1]?hh:"0"+hhChars[0]) +  (minChars[1]?min:"0"+minChars[0]) +  (ssChars[1]?ss:"0"+ssChars[0]);
 }
 
 
@@ -202,9 +223,9 @@ function setFolder() {
                 setTimeValue(dropdownlistTime);
             }
             
-            // Selection du chemin de sauvegarde
+            // Selection du chemin de sauvegarde et changement du texte affiché
             buttonOpenPath.onClick = function() {
-                editNewPath.text = setFolder();
+                editNewPath.text, selectedFolder = setFolder();
             }
 
             win.layout.layout(true);
